@@ -17,9 +17,13 @@ jobs:
           echo "${{ github.event.pull_request.base.sha }}"
 
       - name: Download apk artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: artifact-${{ github.sha }}
+
+      - name: Rename apk artifact
+        run: |
+          mv commit.txt commit-${{ github.ref_name }}.txt
 
       # - name: Release
       #   uses: softprops/action-gh-release@v1
