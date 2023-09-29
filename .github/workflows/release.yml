@@ -19,6 +19,7 @@ jobs:
       - name: Download apk artifact
         uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: build.yml
           name: artifact-${{ github.sha }}
 
       - name: Rename apk artifact
