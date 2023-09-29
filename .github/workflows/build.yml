@@ -36,15 +36,16 @@ jobs:
           echo "${{ github.sha }}"
           echo "${{ github.event.pull_request.head.sha }}"
           echo "${{ github.event.pull_request.base.sha }}"
+          ls ~
 
       - name: Download apk artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           name: artifact-${{ github.event.pull_request.head.sha }}
-          path: ~/commit-pr.txt
+          path: ~/
 
       - name: Archive apk artifact
         uses: actions/upload-artifact@v3
         with:
           name: artifact-${{ github.sha }}
-          path: ~/commit-pr.txt
+          path: ~/commit.txt
