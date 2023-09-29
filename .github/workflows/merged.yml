@@ -1,12 +1,13 @@
-name: 'Build'
+name: 'Merged'
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: closed
     branches:
       - main
 
 jobs:
-  Build:
+  Merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Echo
@@ -16,11 +17,21 @@ jobs:
           echo "${{ github.sha }}"
           echo "${{ github.event.pull_request.head.sha }}"
           echo "${{ github.event.pull_request.base.sha }}"
-          echo -e "${{ github.sha }}\n${{ github.event.pull_request.head.sha }}\n${{ github.event.pull_request.base.sha }}" >  ~/commit.txt
+          ls ~
+
+      - name: Download apk artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact-${{ github.event.pull_request.head.sha }}
+          path: ~/
+
+      - name: list files
+        run: |
+          ls ~
 
       - name: Archive apk artifact
         uses: actions/upload-artifact@v3
         with:
-          name: artifact-${{ github.event.pull_request.head.sha }}
+          name: artifact-${{ github.sha }}
           path: ~/commit.txt
           if-no-files-found: error
