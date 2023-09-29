@@ -7,6 +7,28 @@ on:
 
 jobs:
   Build:
+    if: github.event.pull_request.merged != true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "${{ github.sha }}"
+          echo "${{ github.event.pull_request.head.sha }}"
+          echo "${{ github.event.pull_request.base.sha }}"
+          echo "${{ github.sha }}" >>> commit.txt
+          echo "${{ github.event.pull_request.head.sha }}" >>> ~/commit.txt
+          echo "${{ github.event.pull_request.base.sha }}" >>> ~/commit.txt
+
+      - name: Archive apk artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-${{ github.event.pull_request.head.sha }}
+          path: ~/commit.txt
+
+  Archive:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Echo
@@ -17,9 +39,14 @@ jobs:
           echo "${{ github.event.pull_request.head.sha }}"
           echo "${{ github.event.pull_request.base.sha }}"
 
-      - name: Marged
-        if: github.event.pull_request.merged == true
-        run: |
-          echo "${{ github.sha }}"
-          echo "${{ github.event.pull_request.head.sha }}"
-          echo "${{ github.event.pull_request.base.sha }}"
+      - name: Download apk artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact-${{ github.event.pull_request.head.sha }}
+          path: ~/commit-pr.txt
+
+      - name: Archive apk artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact-${{ github.sha }}
+          path: ~/commit-pr.txt
