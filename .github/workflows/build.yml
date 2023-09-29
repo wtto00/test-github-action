@@ -38,7 +38,7 @@ jobs:
           echo "${{ github.event.pull_request.base.sha }}"
 
       - name: Download apk artifact
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: artifact-${{ github.event.pull_request.head.sha }}
           path: ~/commit-pr.txt
