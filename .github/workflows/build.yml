@@ -24,6 +24,7 @@ jobs:
         with:
           name: artifact-${{ github.event.pull_request.head.sha }}
           path: ~/commit.txt
+          if-no-files-found: error
 
   Archive:
     if: github.event.pull_request.merged == true
@@ -44,8 +45,13 @@ jobs:
           name: artifact-${{ github.event.pull_request.head.sha }}
           path: ~/
 
+      - name: list files
+        run: |
+          ls ~
+
       - name: Archive apk artifact
         uses: actions/upload-artifact@v3
         with:
           name: artifact-${{ github.sha }}
           path: ~/commit.txt
+          if-no-files-found: error
