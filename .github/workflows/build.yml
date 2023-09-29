@@ -17,9 +17,7 @@ jobs:
           echo "${{ github.sha }}"
           echo "${{ github.event.pull_request.head.sha }}"
           echo "${{ github.event.pull_request.base.sha }}"
-          echo "${{ github.sha }}" >>> commit.txt
-          echo "${{ github.event.pull_request.head.sha }}" >>> ~/commit.txt
-          echo "${{ github.event.pull_request.base.sha }}" >>> ~/commit.txt
+          echo -e "${{ github.sha }}\n${{ github.event.pull_request.head.sha }}\n${{ github.event.pull_request.base.sha }}" >  ~/commit.txt
 
       - name: Archive apk artifact
         uses: actions/upload-artifact@v3
