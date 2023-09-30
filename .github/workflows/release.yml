@@ -1,36 +1,36 @@
-name: 'Release'
-on:
-  push:
-    tags:
-      - 'v*'
+# name: 'Release'
+# on:
+#   push:
+#     tags:
+#       - 'v*'
 
-jobs:
-  Release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Echo
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "${{ github.sha }}"
-          echo "${{ github.event.pull_request.head.sha }}"
-          echo "${{ github.event.pull_request.base.sha }}"
+# jobs:
+#   Release:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Echo
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#         run: |
+#           echo "${{ github.sha }}"
+#           echo "${{ github.event.pull_request.head.sha }}"
+#           echo "${{ github.event.pull_request.base.sha }}"
 
-      - name: Download apk artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: build.yml
-          name: artifact-${{ github.sha }}
+#       - name: Download apk artifact
+#         uses: dawidd6/action-download-artifact@v2
+#         with:
+#           workflow: build.yml
+#           name: artifact-${{ github.sha }}
 
-      - name: Rename apk artifact
-        run: |
-          mv commit.txt commit-${{ github.ref_name }}.txt
+#       - name: Rename apk artifact
+#         run: |
+#           mv commit.txt commit-${{ github.ref_name }}.txt
 
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     draft: true
-      #     generate_release_notes: true
-      #     files: ./app/build/outputs/apk/release/wang.tato.webview_${{ github.ref_name }}.apk
+#       # - name: Release
+#       #   uses: softprops/action-gh-release@v1
+#       #   env:
+#       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       #   with:
+#       #     draft: true
+#       #     generate_release_notes: true
+#       #     files: ./app/build/outputs/apk/release/wang.tato.webview_${{ github.ref_name }}.apk

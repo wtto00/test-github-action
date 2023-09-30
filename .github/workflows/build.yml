@@ -1,57 +1,57 @@
-name: 'Build'
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+# name: 'Build'
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened, closed]
+#     branches:
+#       - main
 
-jobs:
-  Build:
-    if: github.event.pull_request.merged != true
-    runs-on: ubuntu-latest
-    steps:
-      - name: Echo
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "${{ github.sha }}"
-          echo "${{ github.event.pull_request.head.sha }}"
-          echo "${{ github.event.pull_request.base.sha }}"
-          echo -e "${{ github.sha }}\n${{ github.event.pull_request.head.sha }}\n${{ github.event.pull_request.base.sha }}" >  ~/commit.txt
+# jobs:
+#   Build:
+#     if: github.event.pull_request.merged != true
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Echo
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#         run: |
+#           echo "${{ github.sha }}"
+#           echo "${{ github.event.pull_request.head.sha }}"
+#           echo "${{ github.event.pull_request.base.sha }}"
+#           echo -e "${{ github.sha }}\n${{ github.event.pull_request.head.sha }}\n${{ github.event.pull_request.base.sha }}" >  ~/commit.txt
 
-      - name: Archive apk artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifact-${{ github.event.pull_request.head.sha }}
-          path: ~/commit.txt
-          if-no-files-found: error
+#       - name: Archive apk artifact
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: artifact-${{ github.event.pull_request.head.sha }}
+#           path: ~/commit.txt
+#           if-no-files-found: error
 
-  Archive:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-      - name: Echo
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "${{ github.sha }}"
-          echo "${{ github.event.pull_request.head.sha }}"
-          echo "${{ github.event.pull_request.base.sha }}"
-          ls ${{ github.workspace }}
+#   Archive:
+#     if: github.event.pull_request.merged == true
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Echo
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#         run: |
+#           echo "${{ github.sha }}"
+#           echo "${{ github.event.pull_request.head.sha }}"
+#           echo "${{ github.event.pull_request.base.sha }}"
+#           ls ${{ github.workspace }}
 
-      - name: Download apk artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          name: artifact-${{ github.event.pull_request.head.sha }}
-          # path: ${{ github.workspace }}
+#       - name: Download apk artifact
+#         uses: dawidd6/action-download-artifact@v2
+#         with:
+#           name: artifact-${{ github.event.pull_request.head.sha }}
+#           # path: ${{ github.workspace }}
 
-      - name: list files
-        run: |
-          ls ${{ github.workspace }}
+#       - name: list files
+#         run: |
+#           ls ${{ github.workspace }}
 
-      - name: Archive apk artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifact-${{ github.sha }}
-          path: commit.txt
-          if-no-files-found: error
+#       - name: Archive apk artifact
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: artifact-${{ github.sha }}
+#           path: commit.txt
+#           if-no-files-found: error
