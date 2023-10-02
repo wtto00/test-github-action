@@ -19,6 +19,9 @@ jobs:
 
       - name: Echo
         run: |
+          sdkmanager --install emulator
+          sdkmanager --install "system-images;android-31;default;x86_64"
+          avdmanager -s create avd -n android_emulator_name -k "system-images;android-31;default;x86_64"
           ls -a $ANDROID_HOME
           echo '------------'
           ls -a ~/.android
