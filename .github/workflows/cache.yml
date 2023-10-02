@@ -1,0 +1,29 @@
+name: Cache
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "${{ github.sha }}"
+          echo "${{ github.event.pull_request.head.sha }}"
+          echo "${{ github.event.pull_request.base.sha }}"
+          ls ${{ github.workspace }}
+          echo -e "${{ github.sha }}\n${{ github.event.pull_request.head.sha }}\n${{ github.event.pull_request.base.sha }}" >  ~/commit.txt
+
+      - name: cache home
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: $HOME
+          key: home-cache-key
+
+      - name: cache outputs
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: echo "not cache hit"
