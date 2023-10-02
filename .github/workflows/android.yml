@@ -25,3 +25,5 @@ jobs:
           ls -a $ANDROID_HOME
           echo '------------'
           ls -a ~/.android
+          echo '------------'
+          ls -a ~
