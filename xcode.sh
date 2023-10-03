@@ -1,17 +1,16 @@
 #!/bin/bash
+# 定义模拟器设备和系统版本
+DEVICE="iPhone 15"
+OS_VERSION="17.0"
 
-echo 'start to boot iPhone 15'
-xcrun simctl boot "iPhone 15"
+# 使用 xcrun 工具启动模拟器
+xcrun simctl boot "${DEVICE}" "${OS_VERSION}"
 
 # 等待模拟器启动完成
-while true; do
-  status=$(xcrun simctl list | grep "iPhone 15" | awk '{print $5}')
-  echo "boot status: $status"
-  if [[ "$status" == "Booted" ]]; then
-    break
-  fi
-  sleep 1
+while ! xcrun simctl launch booted safari; do
+  echo $(xcrun simctl list | grep "iPhone 15")
+  sleep 10
 done
 
-# 在模拟器中打开链接
+echo "booted"
 xcrun simctl openurl booted https://google.com
