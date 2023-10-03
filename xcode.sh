@@ -1,5 +1,7 @@
 #!/bin/bash
 
+open -a Simulator
+
 xcrun simctl list
 
 xcrun simctl boot "$IPHONE_MODEL"
