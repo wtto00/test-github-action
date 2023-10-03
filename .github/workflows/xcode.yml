@@ -20,7 +20,7 @@ jobs:
           sudo xcode-select -s "/Applications/Xcode_15.0.app"
           bash ./xcode.sh
 
-  xcode_14_macos_13_iOS_16.4:
+  xcode_14_macos_13_iOS_16_4:
     runs-on: macos-13
     steps:
       - name: Checkout Code
@@ -34,7 +34,7 @@ jobs:
           ls -a /Applications/
           bash ./xcode.sh
 
-  xcode_14_macos_12_iOS_16.2:
+  xcode_14_macos_12_iOS_16_2:
     runs-on: macos-latest
     steps:
       - name: Checkout Code
