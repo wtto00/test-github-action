@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm -rf ~/Library/Caches/*
+rm -rf ~/Library/Developer/CoreSimulator/Caches/*
+
 open -a Simulator
 
 xcrun simctl list
@@ -18,4 +21,4 @@ while true; do
 done
 
 echo 'openurl'
-xcrun simctl openurl booted https://google.com
+xcrun simctl openurl $IPHONE_MODEL "https://google.com"
