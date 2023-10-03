@@ -14,4 +14,4 @@ jobs:
       - run: |
           ls -a /Applications/
           sudo xcode-select -s "/Applications/Xcode_15.0.app"
-          bash xcode.sh
+          bash ./xcode.sh
