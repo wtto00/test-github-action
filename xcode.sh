@@ -6,8 +6,9 @@ xcrun simctl boot "$IPHONE_MODEL"
 
 echo 'wait for booted'
 while true; do
-  status=$(xcrun simctl list | grep "$IPHONE_MODEL" | awk '{print $5}')
+  status=$(xcrun simctl list | grep "phone:" | grep "$IPHONE_MODEL" | awk '{print $5}')
   echo $(xcrun simctl list | grep "$IPHONE_MODEL")
+  echo "status: $status"
   if [[ "$status" == "(Booted)" ]]; then
     break
   fi
