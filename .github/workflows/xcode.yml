@@ -43,7 +43,7 @@ jobs:
       - name: boot simulator
         env:
           # iPhone 14 with iOS 16.2
-          IPHONE_MODEL: 'BDC3DCB4-9BC6-4DBF-93FD-312192818135'
+          IPHONE_MODEL: '92DF7F17-8DA7-400E-975F-7AA7C5004EA0'
         run: |
           ls -a /Applications/
           bash ./xcode.sh
