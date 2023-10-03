@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  Xcode_15_iOS_17:
+  xcode_15_macos_13_iOS_17:
     runs-on: macos-13
     steps:
       - name: Checkout Code
@@ -13,13 +13,14 @@ jobs:
 
       - name: boot simulator
         env:
-          IPHONE_MODEL: 'iPhone 15'
+          # iPhone 17 with iOS 17.0
+          IPHONE_MODEL: 'CA968C7D-0661-4517-9E8F-06A54215C5FD'
         run: |
           ls -a /Applications/
           sudo xcode-select -s "/Applications/Xcode_15.0.app"
           bash ./xcode.sh
 
-  Xcode_14_iOS_16:
+  xcode_14_macos_13_iOS_16.4:
     runs-on: macos-13
     steps:
       - name: Checkout Code
@@ -27,12 +28,13 @@ jobs:
 
       - name: boot simulator
         env:
-          IPHONE_MODEL: 'iPhone 14'
+          # iPhone 14 with iOS 16.4
+          IPHONE_MODEL: 'E8C11E27-784B-4FC0-AB92-D79C0307B337'
         run: |
           ls -a /Applications/
           bash ./xcode.sh
 
-  xcode_macos_12:
+  xcode_14_macos_12_iOS_16.2:
     runs-on: macos-latest
     steps:
       - name: Checkout Code
@@ -40,7 +42,8 @@ jobs:
 
       - name: boot simulator
         env:
-          IPHONE_MODEL: 'iPhone 14'
+          # iPhone 14 with iOS 16.2
+          IPHONE_MODEL: '92DF7F17-8DA7-400E-975F-7AA7C5004EA0'
         run: |
           ls -a /Applications/
           bash ./xcode.sh
