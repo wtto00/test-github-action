@@ -1,0 +1,11 @@
+name: 'Xcode'
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Xcode:
+    runs-on: macos-13
+    steps:
+      - run: ls -a /Applications/
