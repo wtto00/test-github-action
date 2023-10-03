@@ -8,4 +8,10 @@ jobs:
   Xcode:
     runs-on: macos-13
     steps:
-      - run: ls -a /Applications/
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - run: |
+          ls -a /Applications/
+          sudo xcode-select -s "/Applications/Xcode_15.0.app"
+          bash xcode.sh
