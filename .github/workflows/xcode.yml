@@ -5,14 +5,42 @@ on:
       - main
 
 jobs:
-  Xcode:
+  Xcode_15_iOS_17:
     runs-on: macos-13
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - run: |
+      - name: boot simulator
+        env:
+          IPHONE_MODEL: 'iPhone 15'
+        run: |
           ls -a /Applications/
           sudo xcode-select -s "/Applications/Xcode_15.0.app"
-          # xcrun simctl list | grep "iPhone 15"
+          bash ./xcode.sh
+
+  Xcode_14_iOS_16:
+    runs-on: macos-13
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: boot simulator
+        env:
+          IPHONE_MODEL: 'iPhone 14'
+        run: |
+          ls -a /Applications/
+          bash ./xcode.sh
+
+  xcode_macos_12:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: boot simulator
+        env:
+          IPHONE_MODEL: 'iPhone 14'
+        run: |
+          ls -a /Applications/
           bash ./xcode.sh
