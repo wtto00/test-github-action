@@ -14,4 +14,5 @@ jobs:
       - run: |
           ls -a /Applications/
           sudo xcode-select -s "/Applications/Xcode_15.0.app"
-          bash ./xcode.sh
+          xcrun simctl list
+          # bash ./xcode.sh
