@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   xcode_15_macos_13_iOS_17:
