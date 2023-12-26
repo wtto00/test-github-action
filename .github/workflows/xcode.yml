@@ -14,8 +14,8 @@ jobs:
 
       - name: boot simulator
         env:
-          # iPhone 17 with iOS 17.0
-          IPHONE_MODEL: 'CA968C7D-0661-4517-9E8F-06A54215C5FD'
+          # iPhone 15 with iOS 17.0
+          IPHONE_MODEL: '387F63F3-9D50-4E30-95DA-2547D832EF4B'
         run: |
           ls -a /Applications/
           sudo xcode-select -s "/Applications/Xcode_15.0.app"
