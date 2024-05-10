@@ -7,7 +7,7 @@ on:
 
 jobs:
   Build:
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: Setup JDK 17
         uses: actions/setup-java@v3
