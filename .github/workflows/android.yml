@@ -31,6 +31,6 @@ jobs:
       - name: list images
         run: sdkmanager --list
       - name: install image
-        run: sdkmanager --install 'system-images;android-31;target;arm64-v8a'
+        run: sdkmanager --install 'system-images;android-31;default;arm64-v8a'
       - name: create avd
-        run: avdmanager -s create avd -n TestCreate_12345 -k 'system-images;android-31;target;arm64-v8a'
+        run: avdmanager -s create avd -n TestCreate_12345 -k 'system-images;android-31;default;arm64-v8a'
