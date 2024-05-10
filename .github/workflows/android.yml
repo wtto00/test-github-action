@@ -36,3 +36,5 @@ jobs:
         run: avdmanager -s create avd -n TestCreate_12345 -k 'system-images;android-31;default;arm64-v8a' --force
       - name: list avd
         run: avdmanager list avd
+      - name: start avd
+        run: "$ANDROID_HOME/emulator/emulator -verbose -avd TestCreate_12345 -noaudio -no-boot-anim -no-snapshot -no-snapshot-save -no-window -gpu swiftshader_indirect"
